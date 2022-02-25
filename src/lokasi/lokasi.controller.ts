@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Param } from "@nestjs/common";
 import { LokasiService } from "./lokasi.service";
 
 @Controller('lokasi')
@@ -10,7 +10,16 @@ export class LokasiController
     }
     
     @Get()
-    findAll() {
-        return this.lokasiService.findAll();
+    async findAll() {
+        return {
+            data: await this.lokasiService.findAll()
+        };
+    }
+
+    @Get(':id')
+    async findOne(@Param('id') id: number){
+        return {
+            data: await this.lokasiService.findOne(id)
+        };
     }
 }

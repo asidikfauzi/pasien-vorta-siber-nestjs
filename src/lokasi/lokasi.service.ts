@@ -6,13 +6,16 @@ import { Lokasi } from "./lokasi.entity";
 @Injectable()
 export class LokasiService 
 {
-    constructor(@InjectRepository(Lokasi) private readonly lokasiRepository: Repository<Lokasi>)
-    {
-
-    }
+    constructor(@InjectRepository(Lokasi) private readonly lokasiRepository: Repository<Lokasi>){}
 
     findAll()
     {
         return this.lokasiRepository.find();
     }
+
+    findOne(id: number)
+    {
+        return this.lokasiRepository.findOneOrFail(id);
+    }
+
 }
