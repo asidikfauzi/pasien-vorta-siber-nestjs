@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { LokasiController } from './lokasi/lokasi.controller';
+import { Lokasi } from './lokasi/lokasi.entity';
+import { LokasiService } from './lokasi/lokasi.service';
 import { PasienController } from './pasien/pasien.controller';
 import { Pasien } from './pasien/pasien.entity';
 import { PasienService } from './pasien/pasien.service';
@@ -17,9 +20,9 @@ import { PasienService } from './pasien/pasien.service';
       autoLoadEntities : true,
       synchronize : true,
     }),
-    TypeOrmModule.forFeature([Pasien])
+    TypeOrmModule.forFeature([Pasien, Lokasi])
   ],
-  controllers: [PasienController],
-  providers: [PasienService],
+  controllers: [PasienController, LokasiController],
+  providers: [PasienService, LokasiService],
 })
 export class AppModule {}
