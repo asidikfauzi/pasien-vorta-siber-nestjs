@@ -1,7 +1,10 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, UseFilters } from "@nestjs/common";
+import { CreatePasienDto } from "./create-pasien.dto";
+import { EntityNotFoundExceptionFilter } from "./entity-not-found-exception.filter";
 import { PasienService } from "./pasien.service";
 
 @Controller('pasien')
+@UseFilters(new EntityNotFoundExceptionFilter)
 export class PasienController
 {
     constructor(private readonly pasienService: PasienService){}
@@ -19,5 +22,12 @@ export class PasienController
         return {
             data: await this.pasienService.findOne(id)
         };
+    }
+
+    @Post()
+    async create(@Body() data: CreatePasienDto) {
+        return {
+            data: await this.pasienService.create(data)
+        }
     }
 }
