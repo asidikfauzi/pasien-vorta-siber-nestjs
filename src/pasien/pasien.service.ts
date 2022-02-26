@@ -30,4 +30,8 @@ export class PasienService
         
         return this.pasienRepository.save(pasien);
     }
+
+    update(data: CreatePasienDto, id: string){
+        return this.pasienRepository.save({...data, id: String(id)})
+    }
 }

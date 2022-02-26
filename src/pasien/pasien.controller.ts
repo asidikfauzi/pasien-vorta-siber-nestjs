@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UseFilters } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, UseFilters } from "@nestjs/common";
 import { CreatePasienDto } from "./create-pasien.dto";
 import { EntityNotFoundExceptionFilter } from "./entity-not-found-exception.filter";
 import { PasienService } from "./pasien.service";
@@ -28,6 +28,13 @@ export class PasienController
     async create(@Body() data: CreatePasienDto) {
         return {
             data: await this.pasienService.create(data)
-        }
+        };
+    }
+
+    @Put(':id')
+    async update(@Body() data: CreatePasienDto, @Param('id') id: string) {
+        return {
+                data: await this.pasienService.update(data, id)
+        };
     }
 }
