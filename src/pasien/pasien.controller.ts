@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, UseFilters } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters } from "@nestjs/common";
 import { CreatePasienDto } from "./create-pasien.dto";
 import { EntityNotFoundExceptionFilter } from "./entity-not-found-exception.filter";
 import { PasienService } from "./pasien.service";
@@ -36,5 +36,13 @@ export class PasienController
         return {
                 data: await this.pasienService.update(data, id)
         };
+    }
+
+    @Delete(':id')
+    async remove(@Param('id') id: string){
+        await this.pasienService.delete(id)
+        return{
+            message : "data berhasil di hapus"
+        }
     }
 }

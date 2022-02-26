@@ -34,4 +34,8 @@ export class PasienService
     update(data: CreatePasienDto, id: string){
         return this.pasienRepository.save({...data, id: String(id)})
     }
+
+    delete(id: string){
+        return this.pasienRepository.delete(id)
+    }
 }
