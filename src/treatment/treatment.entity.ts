@@ -1,6 +1,10 @@
 import { Lokasi } from "src/lokasi/lokasi.entity";
 import { Pasien } from "src/pasien/pasien.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Transform } from 'class-transformer';
+import moment from "moment";
+import { isString } from "util";
+import { isStringObject } from "util/types";
 
 @Entity()
 export class Treatment 
@@ -14,11 +18,12 @@ export class Treatment
     @Column()
     waktu : Date;
 
-    @ManyToOne(type=> Pasien, pasien => pasien.id, {onDelete: 'SET NULL'}) 
+    
+    @ManyToOne(()=>Pasien, (pasien:Pasien)=>pasien.treatment, {onUpdate:'CASCADE', onDelete:'CASCADE'}) 
     @JoinColumn({name: 'pasienId'})
-    pasien : Pasien;
+    pasien : string;
 
-    @ManyToOne(type=> Lokasi, lokasi => lokasi.id, {onDelete: 'SET NULL'})
+    @ManyToOne(()=>Lokasi, (lokasi:Lokasi)=>lokasi.treatment, {onUpdate:'CASCADE', onDelete:'CASCADE'})
     @JoinColumn({name: 'lokasiId'})
     lokasi : number;
 }

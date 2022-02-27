@@ -24,12 +24,6 @@ export class PasienService
         });
     }
 
-    getPasienAndTreatment()
-    {
-        return this.pasienRepository.find({
-            relations: ['treatment'], join: {alias:'pasien', innerJoin: { pasienId: 'pasien.id'}}
-        })
-    }
 
     create(data: CreatePasienDto){
         const pasien = new Pasien();

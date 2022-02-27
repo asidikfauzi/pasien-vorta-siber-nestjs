@@ -2,6 +2,23 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters } from "@ne
 import { CreatePasienDto } from "./create-pasien.dto";
 import { EntityNotFoundExceptionFilter } from "./entity-not-found-exception.filter";
 import { PasienService } from "./pasien.service";
+import { Crud } from '@nestjsx/crud';
+import { Pasien } from "./pasien.entity";
+
+@Crud({
+    model: {
+        type: Pasien,
+    },
+    query: {
+        limit:6,
+        alwaysPaginate: true,
+        join: {
+            treatment: {
+                eager: true,
+            },
+        }
+    }
+})
 
 @Controller('pasien')
 @UseFilters(new EntityNotFoundExceptionFilter)

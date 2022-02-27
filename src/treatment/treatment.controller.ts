@@ -1,4 +1,6 @@
-import { Controller, Get, Param, UseFilters } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, UseFilters } from "@nestjs/common";
+import { CreatePasienDto } from "src/pasien/create-pasien.dto";
+import { CreateTreatmentDto } from "./create-treatment.dto";
 import { Treatment } from "./treatment.entity";
 import { TreatmentService } from "./treatment.service";
 
@@ -16,9 +18,19 @@ export class TreatmentController
     }
 
     @Get(':id')
-    async getPasienById(@Param('id') id: string): Promise<any>{
-        return this.treatmentService.getPasienById(id);
+    async getPasienById(@Param('id') id: number): Promise<any>{
+        return {
+            data : await this.treatmentService.getPasienById(id)
+        }
     }
+
+    @Put(':id')
+    async update(@Param('id') id: number, @Body() data: CreateTreatmentDto) {
+        return {
+                data: await this.treatmentService.updateTreatment(id, data)
+        };
+    }
+
 
    
 }

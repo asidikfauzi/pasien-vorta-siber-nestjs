@@ -10,6 +10,6 @@ export class Lokasi
     @Column()
     nama : string;
 
-    @OneToMany(type=>Treatment, treatment=>treatment.id)
+    @OneToMany(()=>Treatment, (treatment:Treatment)=>treatment.pasien, {onUpdate:'CASCADE', onDelete:'CASCADE'})
     treatment: Treatment[];
 }
