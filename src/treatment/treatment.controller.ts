@@ -1,4 +1,4 @@
-import { Controller, Get, UseFilters } from "@nestjs/common";
+import { Controller, Get, Param, UseFilters } from "@nestjs/common";
 import { Treatment } from "./treatment.entity";
 import { TreatmentService } from "./treatment.service";
 
@@ -16,7 +16,7 @@ export class TreatmentController
     }
 
     @Get(':id')
-    async getPasienById(id): Promise<any>{
+    async getPasienById(@Param('id') id: string): Promise<any>{
         return this.treatmentService.getPasienById(id);
     }
 

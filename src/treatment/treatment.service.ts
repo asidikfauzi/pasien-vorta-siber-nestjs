@@ -10,7 +10,11 @@ export class TreatmentService
 
     findAll()
     {
-        return this.treatmentRepository.find();
+        return this.treatmentRepository
+                .createQueryBuilder('treatment')
+                .leftJoinAndSelect('treatment.pasien', 'pasien')
+                .leftJoinAndSelect('treatment.lokasi', 'lokasi')
+                .getMany();
     }
 
     findOne(id: number)
@@ -18,7 +22,7 @@ export class TreatmentService
         return this.treatmentRepository.findOneOrFail(id);
     }
 
-    getPasienById(@Param('id') id: string)
+    getPasienById(id: string)
     {
         return this.treatmentRepository.findOne(id, {
             relations: ['pasien']

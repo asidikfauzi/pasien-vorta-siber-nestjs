@@ -1,6 +1,6 @@
 import { type } from "os";
 import { Treatment } from "src/treatment/treatment.entity";
-import { Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Pasien 
@@ -20,6 +20,6 @@ export class Pasien
     @Column({ default : true })
     isActive : boolean;
 
-    @OneToMany(type=>Treatment, treatment=>treatment.id)
+    @OneToMany(type=>Treatment, treatment=>treatment.pasien)
     treatment: Treatment[];
 }

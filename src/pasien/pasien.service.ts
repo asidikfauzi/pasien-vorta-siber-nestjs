@@ -12,12 +12,21 @@ export class PasienService
 
     findAll()
     {
-        return this.pasienRepository.find();
+        return this.pasienRepository.find({
+            relations:['treatment'],
+        });
     }
 
     findOne(id: string)
     {
         return this.pasienRepository.findOneOrFail(id);
+    }
+
+    getPasienAndTreatment()
+    {
+        return this.pasienRepository.find({
+            relations: ['treatment'], join: {alias:'pasien', innerJoin: { pasienId: 'pasien.id'}}
+        })
     }
 
     create(data: CreatePasienDto){
