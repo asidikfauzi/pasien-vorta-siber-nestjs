@@ -4,6 +4,8 @@ import { Repository } from "typeorm";
 import { CreatePasienDto } from "./create-pasien.dto";
 import { Pasien } from "./pasien.entity";
 import { v4 as uuidv4 } from 'uuid';
+import { paginate, Pagination, IPaginationOptions } from "nestjs-typeorm-paginate";
+import { from, map, Observable } from "rxjs";
 
 @Injectable()
 export class PasienService 
@@ -16,6 +18,16 @@ export class PasienService
             relations:['treatment'],
         });
     }
+
+    paginate(option: IPaginationOptions): Observable<Pagination<Pasien>>{
+        return from(paginate<Pasien>(this.pasienRepository.createQueryBuilder('pasien').leftJoinAndSelect('pasien.treatment', 'treatment') , option)).pipe(
+            map((pasienPageable: Pagination<Pasien>)=> {
+                pasienPageable.items.forEach(function () {});
+                return pasienPageable;
+            })
+        )
+    }
+
 
     findOne(id: string)
     {
