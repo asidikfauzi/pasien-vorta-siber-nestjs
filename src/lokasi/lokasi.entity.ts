@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Treatment } from "src/treatment/treatment.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Lokasi 
@@ -8,4 +9,7 @@ export class Lokasi
 
     @Column()
     nama : string;
+
+    @OneToMany(type=>Treatment, treatment=>treatment.id)
+    treatment: Treatment[];
 }

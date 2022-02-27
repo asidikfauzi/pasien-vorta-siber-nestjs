@@ -6,6 +6,9 @@ import { LokasiService } from './lokasi/lokasi.service';
 import { PasienController } from './pasien/pasien.controller';
 import { Pasien } from './pasien/pasien.entity';
 import { PasienService } from './pasien/pasien.service';
+import { TreatmentController } from './treatment/treatment.controller';
+import { Treatment } from './treatment/treatment.entity';
+import { TreatmentService } from './treatment/treatment.service';
 
 
 @Module({
@@ -20,9 +23,9 @@ import { PasienService } from './pasien/pasien.service';
       autoLoadEntities : true,
       synchronize : true,
     }),
-    TypeOrmModule.forFeature([Pasien, Lokasi])
+    TypeOrmModule.forFeature([Pasien, Lokasi, Treatment])
   ],
-  controllers: [PasienController, LokasiController],
-  providers: [PasienService, LokasiService],
+  controllers: [PasienController, LokasiController, TreatmentController],
+  providers: [PasienService, LokasiService, TreatmentService],
 })
 export class AppModule {}
