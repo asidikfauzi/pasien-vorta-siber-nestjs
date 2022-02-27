@@ -19,7 +19,9 @@ export class PasienService
 
     findOne(id: string)
     {
-        return this.pasienRepository.findOneOrFail(id);
+        return this.pasienRepository.findOneOrFail(id,{
+            relations:['treatment'],
+        });
     }
 
     getPasienAndTreatment()
