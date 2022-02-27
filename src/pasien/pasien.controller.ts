@@ -31,7 +31,7 @@ export class PasienController
     
 
     @Get()
-    index(@Query('page') page: number = 1, @Query('limit') limit: number = 6): Observable<Pagination<Pasien>> {
+    index(@Query('page') page: number = 1, @Query('limit') limit: number = 7): Observable<Pagination<Pasien>> {
         limit = limit > 100 ? 100 : limit;
         return  this.pasienService.paginate({page: Number(page), limit: Number(limit), route: 'http://localhost:3000/pasien'});
     }
@@ -39,7 +39,7 @@ export class PasienController
     @Get(':id')
     async findOne(@Param('id') id: string){
         return {
-            data: await this.pasienService.findOne(id)
+            data: await this.pasienService.findOne(id),
         };
     }
 
@@ -53,7 +53,8 @@ export class PasienController
     @Put(':id')
     async update(@Body() data: CreatePasienDto, @Param('id') id: string) {
         return {
-                data: await this.pasienService.update(data, id)
+                data: await this.pasienService.update(data, id),
+                message: 'berhasil mengubah pasien'
         };
     }
 

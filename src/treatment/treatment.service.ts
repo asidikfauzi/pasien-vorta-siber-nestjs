@@ -44,7 +44,10 @@ export class TreatmentService
         });
         if(updatedTreatment)
         {
-            return this.treatmentRepository.update(id, treatment);
+            return {
+                data : this.treatmentRepository.update(id, treatment),
+                message : "Berhasil Ubah Jadwal Appointment " + treatment.nama
+            }
         }
     }
 }
