@@ -27,7 +27,8 @@ export class TreatmentController
     @Put(':id')
     async update(@Param('id') id: number, @Body() data: CreateTreatmentDto) {
         return {
-                data: await this.treatmentService.updateTreatment(id, data)
+                data: await this.treatmentService.updateTreatment(id, data),
+                message : "Berhasil Ubah Jadwal Appointment"
         };
     }
 
