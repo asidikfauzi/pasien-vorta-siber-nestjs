@@ -58,6 +58,14 @@ export class PasienController
         };
     }
 
+    @Put('nonaktif/:id')
+    async nonaktiv(@Body() data: CreatePasienDto, @Param('id') id: string) {
+        return {
+                data: await this.pasienService.nonaktive(data, id),
+                message: 'berhasil menonaktifkan pasien'
+        };
+    }
+
     @Delete(':id')
     async remove(@Param('id') id: string){
         await this.pasienService.delete(id)

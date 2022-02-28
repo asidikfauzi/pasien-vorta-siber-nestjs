@@ -52,6 +52,12 @@ export class PasienService
         return this.pasienRepository.save({...data, id: String(id)})
     }
 
+    nonaktive(data: CreatePasienDto, id: string)
+    {
+        data.isActive = false;
+        return this.pasienRepository.save({...data, id: String(id)});
+    }
+
     delete(id: string){
         return this.pasienRepository.delete(id)
     }
