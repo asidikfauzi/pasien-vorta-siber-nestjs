@@ -65,6 +65,13 @@ export class PasienController
                 message: 'berhasil menonaktifkan pasien'
         };
     }
+    @Put('aktif/:id')
+    async aktiv(@Body() data: CreatePasienDto, @Param('id') id: string) {
+        return {
+                data: await this.pasienService.aktive(data, id),
+                message: 'berhasil aktifkan pasien'
+        };
+    }
 
     @Delete(':id')
     async remove(@Param('id') id: string){
